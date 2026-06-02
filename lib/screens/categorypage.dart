@@ -57,6 +57,15 @@ class _CategorypageState
       mallId: 4
     ),
   ];
+ 
+
+    List<Category> get filteredCategories {
+    return categories
+        .where((c) => c.mallId == widget.mallId)
+        .toList();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -86,10 +95,10 @@ class _CategorypageState
                 crossAxisCount: 2,
                 childAspectRatio: 1,
               ),
-              itemCount: categories.length,
+              itemCount: filteredCategories.length,
               itemBuilder: (context, index) {
 
-                final cat = categories[index];
+                final cat = filteredCategories[index];
 
                 return Card(
                   margin: const EdgeInsets.all(10),

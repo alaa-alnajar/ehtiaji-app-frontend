@@ -265,7 +265,7 @@ class _HomePageState extends State<HomePage> {
                                 
                                   InkWell(
                                     onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=> Aqrabawi()
+                                      Navigator.push(context, MaterialPageRoute(builder: (_)=> Aqrabawi()
                                       ),
                                       );
                                     },
