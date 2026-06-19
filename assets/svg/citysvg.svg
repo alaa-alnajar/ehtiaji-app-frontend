@@ -1,0 +1,21 @@
+<svg width="108" height="108" viewBox="0 0 108 108" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g opacity="0.74" filter="url(#filter0_d_464_441)">
+<rect x="9.69995" y="2.69995" width="80" height="80" rx="40" fill="url(#pattern0_464_441)" shape-rendering="crispEdges"/>
+</g>
+<defs>
+<filter id="filter0_d_464_441" x="-4.86374e-05" y="-4.86374e-05" width="107.4" height="107.4" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="4" dy="11"/>
+<feGaussianBlur stdDeviation="6.85"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_464_441"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_464_441" result="shape"/>
+</filter>
+<pattern id="pattern0_464_441" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_464_441" transform="scale(0.0108696)"/>
+</pattern>
+<image id="image0_464_441" width="92" height="92" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFwAAABcCAMAAADUMSJqAAAAY1BMVEX///+cnJyQkJDw8PD6+vqlpaWWlpbExMSFhYWMjIxmZmbV1dXR0dHLy8uqqqr39/fi4uJcXFzc3NwAAAB2dnbo6Oh+fn61tbVGRkZSUlJra2u8vLw5OTkvLy9NTU1XV1glJSWjVYW3AAABcElEQVRoge3S226jMBAG4BmfsLENhmBMIA19/6fsON1FWW0uaFWpN/NJIMPYv4ZJABhjjDHGGGOMsV/WhyZ/rmIXe5AFsi5Fq7BB3iAVet9QsRkBVJG0yuV0djPs+2AUrSb0woNcQMYJo1I3OY0QLh7eHFUXS7db3SevZ7PjpNFZK44z8k43U3sd3zqA4FYtKHxrdvq+5RE+nA2fg286dK2nthKM/ikcFrqCxnuipq9imp/C1Zns3knpC9qVmkxTaxPk2hdutTjQhCNK7y1ETfkZ1rYdUr637Xo2PBQzt93ZT/2KOXrKXhdfH1R6uSch5m+Fh1nbdb/N9S8Jykmt5VEbsYFePcLl8xHwMJ4aOsT9/XKhbJAClCkKpr+V3iqTuhqLOik8TgywgpEvol7x8bFTOuhFdOZqxCdroPNboIrJzjj8w4i64WT2ATXWyR+dQyPoZ0ajHU1c6/Gref9R/4636n4gljHGGGOMMcYY+2kfCR4O1h8PcRMAAAAASUVORK5CYII="/>
+</defs>
+</svg>
