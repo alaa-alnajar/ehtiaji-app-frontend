@@ -1,13 +1,61 @@
+import 'package:ehtiaji/models/malls.dart';
 import 'package:ehtiaji/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:ehtiaji/screens/topbar.dart';
 
 
 class Locationpage extends StatelessWidget {
-  const Locationpage({super.key});
+   Locationpage({super.key});
+
+
+   final List<Mall> malls = [
+
+ Mall(
+  mallId:1,
+  mallName:"سامح مول",
+  latitude:31.95,
+  longitude:'35.91',
+  phone: "",
+  logo: "",
+ ),
+
+ Mall(
+  mallId:2,
+  mallName:"العقرباوي مول",
+  latitude:31.96,
+  longitude:'35.92',
+   phone: "",
+  logo: "",
+ ),
+
+ Mall(
+ mallId:3,
+  mallName:"ميكا مول",
+  latitude:31.97,
+  longitude:'35.93',
+   phone: "",
+  logo: "",
+ ),
+
+ Mall(
+  mallId:4,
+  mallName:"سيتي مول",
+  latitude:31.98,
+  longitude:'35.94',
+   phone: "",
+  logo: "",
+ ),
+
+];
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
+
+ 
 
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
@@ -21,6 +69,8 @@ class Locationpage extends StatelessWidget {
         print('notifications');
       },
       height: 1,
+      isHome: false,
+
     ),
   ),
 
@@ -93,26 +143,23 @@ class Locationpage extends StatelessWidget {
                 physics:
                     const NeverScrollableScrollPhysics(),
 
-                itemCount: 3,
+                itemCount:  malls.length,
 
                 itemBuilder: (context, index) {
 
                   return mallCard(
-                    number: "${index + 1}",
+                                  
+                index: index,
 
-                    title: index == 0
-                        ? "سامح مول"
-                        : index == 1
-                            ? "العقرباوي مول "
-                            : "ميكا مول",
+                number: "${malls[index].mallId}",
 
-                    distance: index == 0
-                        ? "0.5 كم"
-                        : index == 1
-                            ? "1.2 كم"
-                            : "1.8 كم",
-                  );
-                },
+                title: malls[index].mallName,
+
+                distance: "1.0 كم",
+
+              );
+
+                                  },
               ),
             ],
           ),
@@ -122,6 +169,7 @@ class Locationpage extends StatelessWidget {
   }
 
   Widget mallCard({
+    required int index,
     required String number,
     required String title,
     required String distance,
@@ -239,8 +287,22 @@ class Locationpage extends StatelessWidget {
                  
                  height: 40,
                  child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.location_on),
+                  onPressed:  () {
+
+                            print(
+                              malls[index].mallName
+                            );
+
+                            print(
+                              malls[index].latitude
+                            );
+
+                            print(
+                              malls[index].longitude
+                            );
+
+                          },
+                                            icon: const Icon(Icons.location_on),
                   label: const Text("توجيه"),
                   style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.deepBlue,

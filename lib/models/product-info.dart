@@ -2,12 +2,14 @@
   final int productId;
   final String productName;
   final String description;
-  final String price;
+  final double price;
+  final double priceAfterDiscount ;
   final String image;
    int stockQuantity;
   final bool isAvailable;
   final int categoryId;
-  final bool isSpecial; 
+  final int mallId  ;
+  
 
   Product({
     required this.productId,
@@ -15,23 +17,25 @@
     required this.description,
     required this.price,
     required this.image,
+    required this.priceAfterDiscount,
     required this.categoryId,
-    required this.isSpecial,
     required this.stockQuantity,
     required this.isAvailable,
-  });
+    required this.mallId,
+      });
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       productId: json['product_id'],
       productName: json['product_name'] ?? '',
       description: json['description'] ?? '',
-      price: json['price'].toString(),
+      price: json['price'] ?? 0 ,
       image: json['image'] ?? '',
+      priceAfterDiscount: json['priceAfterDiscount'] ?? '',
       stockQuantity: json['stock_quantity'] ?? 0,
       isAvailable: json['is_available'] ?? false,
       categoryId:json['categoryId'] ?? '',
-      isSpecial: json['isSpecial'] ?? '',
+      mallId: json['mallId'] ?? '',
 
     );
   }

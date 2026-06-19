@@ -96,7 +96,7 @@ class _BottomBarState extends State<BottomBar> {
       backgroundColor: AppColors.collGray,
       height: 60,
       animationCurve: Curves.easeInOut,
-      animationDuration: Duration(microseconds: 300),
+      animationDuration: Duration(milliseconds: 300),
       index: selectedindex,
        items:[
         buildIcon(

@@ -1,8 +1,10 @@
 import 'package:ehtiaji/models/cart.dart';
 import 'package:ehtiaji/screens/aqrabawi.dart';
+import 'package:ehtiaji/screens/categorypage.dart';
 import 'package:ehtiaji/screens/city.dart';
 import 'package:ehtiaji/screens/intent_to_buy.dart';
 import 'package:ehtiaji/screens/micca.dart';
+import 'package:ehtiaji/screens/nav-bottom-bar.dart';
 import 'package:ehtiaji/screens/topbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,7 +13,11 @@ import 'package:ehtiaji/models/product-info.dart';
 
 
 class SamihMall extends StatefulWidget {
-  const SamihMall({super.key});
+    final int categoryId;
+
+  const SamihMall({super.key,
+  required this.categoryId});
+  
 
   @override
   State<SamihMall> createState() => _SamihMallState();
@@ -26,22 +32,45 @@ class _SamihMallState extends State<SamihMall> {
 
 
 List<Product> products = [
-  Product(productId:1,productName: " شكولاتة",description:"", price: "0.30", image: "assets/images/chocolate.png",stockQuantity:10,isAvailable:true ,categoryId:1,isSpecial:true),
-  Product(productId:1,productName: "زيت العافية",description:"", price: "2.30", image: "assets/images/oil.png",stockQuantity:10, isAvailable:true ,categoryId:1,isSpecial: true),
-  Product(productId:2,productName: "جبنة سائلة",description:"", price: "3.50", image: "assets/images/lemon.png",stockQuantity:10,isAvailable:true ,categoryId:1,isSpecial: false),
-  Product(productId:3,productName: "لبن ", description:"",price: "0.30", image: "assets/images/yogurt.png",stockQuantity:10, isAvailable:true ,categoryId:1,isSpecial: false),
-  Product(productId:4,productName: "أرز مصري",description:"", price: "5.50", image: "assets/images/rice.png", stockQuantity:10,isAvailable:true ,categoryId:1,isSpecial: true),
-  Product(productId:5,productName: " موز", description:"",price: "2.30", image: "assets/images/banana.png", stockQuantity:10,isAvailable:true ,categoryId:1,isSpecial: true),
-  Product(productId:5,productName: "ليمون",description:"", price: "3.00", image: "assets/images/lemon.png",stockQuantity:10,isAvailable:true ,categoryId:1,isSpecial: false),
+Product(productId:1,productName: " شكولاتة",description:"شوكولاتة بالحليب 100 غرام.", price: 2.00, priceAfterDiscount:1.80, 
+  image: "assets/images/chocolate.png",stockQuantity:10,isAvailable:true ,categoryId:8,mallId: 4),
+
+  Product(productId:1,productName: "زيت العافية",description:"زيت ذرة العافية 1.8 لتر ", price: 2.30,priceAfterDiscount:1.84, 
+  image: "assets/images/oil.png",stockQuantity:10, isAvailable:true ,categoryId:5,mallId: 4),
+
+  Product(productId:2,productName: "جبنة سائلة",description:"جبنة سائلة قابلة للدهن 500 غرام.", price: 3.50, priceAfterDiscount:2.80,
+  image: "assets/images/cheese.png",stockQuantity:10,isAvailable:true ,categoryId:2,mallId:4),
+
+  Product(productId:3,productName: "لبن ", description:": لبن بقري طازج 0.25 لتر",price: 0.30, priceAfterDiscount:0.24,
+  image: "assets/images/yogurt.png",stockQuantity:10, isAvailable:true ,categoryId:2,mallId: 4),
+
+  Product(productId:4,productName: "أرز مصري",description:"أرز مصري فاخر 5 كغم", price: 5.50,priceAfterDiscount:4.40, 
+  image: "assets/images/rice.png", stockQuantity:10,isAvailable:true ,categoryId:5,mallId:4),
+
+  Product(productId:5,productName: " موز 1 كغ", description:"موز صومالي مستورد.",price: 2.30,priceAfterDiscount:1.84,
+   image: "assets/images/banana.png", stockQuantity:10,isAvailable:true ,categoryId:1,mallId: 4),
+
+  Product(productId:6,productName: "ليمون 1 كغ",description:"ليمون بلدي أردني", price: 3.00,priceAfterDiscount:2.40, 
+  image: "assets/images/lemon.png",stockQuantity:10,isAvailable:true ,categoryId:1,mallId: 4),
+   
    
 ];
+ List<Product> get filteredProducts {
+  return products.where((p) {
+    return p.mallId == 4 &&
+           p.categoryId ==widget.categoryId;
+  }).toList();
+}
  
+  
+   
+
+
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-
-      appBar: PreferredSize(
+       appBar: PreferredSize(
       preferredSize: const Size.fromHeight(kToolbarHeight),
       child: Topbar(
       notificationCount: 5,
@@ -49,6 +78,8 @@ List<Product> products = [
         print('notifications');
       },
       height: 1,
+      isHome: false,
+
     ),
   ),
        
@@ -103,16 +134,15 @@ List<Product> products = [
                             
        
 
-
-          Expanded(
+        Expanded(
 
             child: ListView.builder(
 
-              itemCount: products.length,
+              itemCount: filteredProducts.length,
 
               itemBuilder: (context, index) {
 
-                final product = products[index];
+                final product = filteredProducts[index];
 
                 return Padding(
 
@@ -163,9 +193,55 @@ List<Product> products = [
                                     BorderRadius.circular(15),
                               ),
 
-                              child: Image.asset(
-                                product.image,
-                              ),
+                       child: GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                backgroundColor: AppColors.white,
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+
+                                    Image.asset(product.image, height: 100),
+
+                                    const SizedBox(height: 10),
+
+                                    Text(
+                                      product.productName,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+
+                                    const SizedBox(height: 5),
+
+                                    Text(product.description,
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold
+                        ),),
+
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Image.asset(product.image),
+                  )
+                  )
+                                        
+                              
                             ),
 
                             Column(
@@ -180,25 +256,53 @@ List<Product> products = [
                                   product.productName,
 
                                   style: TextStyle(
-                                    fontSize: 18,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                     color: AppColors.collGray,
                                   ),
                                 ),
 
+                                
                                 const SizedBox(height: 10),
 
-                                Text(
+          if (product.priceAfterDiscount < product.price)
+            Row(
+              children: [
 
-                                  "${product.price} د.أ",
+                Text(
+                  "${product.priceAfterDiscount.toStringAsFixed(2)} د.أ",
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                ),
 
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.collGray,
-                                  ),
-                                ),
-                              ],
+                const SizedBox(width: 8),
+
+                Text(
+                  "${product.price.toStringAsFixed(2)} د.أ",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: AppColors.white,
+                    decoration: TextDecoration.lineThrough,
+                    decorationThickness:4
+                  ),
+                ),
+              ],
+            )
+          else
+            Text(
+              "${product.price.toStringAsFixed(2)} د.أ",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: AppColors.collGray,
+              ),
+            ),
+
+
+                                    ],
                             ),
 
                             CircleAvatar(
@@ -243,7 +347,7 @@ List<Product> products = [
                         ),
                       ),
 
-                      if (product.isSpecial)
+                      if (product.priceAfterDiscount < product.price)
 
                         Positioned(
 
@@ -259,16 +363,23 @@ List<Product> products = [
                             ),
                           ),
                         ),
+                        
+                        Text("") 
                     ],
                   ),
                 );
               },
             ),
           ),
+
+
+
+
           ElevatedButton(
                onPressed: (){
-               Navigator.push(context, MaterialPageRoute(builder: (context)=> CityMall(),
-               ),               
+               Navigator.push(context, MaterialPageRoute(
+                builder: (context)=> MiccaMall(categoryId: widget.categoryId,), 
+                              ),               
              );
              },
               child:Text("السوق التالي",
@@ -282,6 +393,7 @@ List<Product> products = [
            )
         ],
       ),
+
     );
   }
 }
@@ -296,170 +408,5 @@ List<Product> products = [
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// هنا بتضيف بياناتك التجريبية
-/*List<Product> products = [
-  Product(name: "عصير برتقال", price: "0.30", image: "assets/images/juice.png",isSpecial: false),
-  Product(name: "أرز مصري", price: "5.50", image: "assets/images/rice.png",isSpecial: true),
-  Product(name: "زيت العافية", price: "2.30", image: "assets/images/oil.png", isSpecial: true),
-  Product(name: "ليمون", price: "3.00 د.أ", image: "assets/images/lemon.png",isSpecial: false),
-  Product(name: "موز ", price: "2.30 د.أ", image: "assets/images/banana.png",isSpecial: true),
-  Product(name: " رمان", price: "1.50", image: "assets/images/pomegranate.png",isSpecial: true),
   
-   
 
-
-   
-   
-
-];
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-        backgroundColor:AppColors.collGray ,
-        toolbarHeight: 60,
-        flexibleSpace: Stack(
-          children: [
-            SvgPicture.asset('assets/svg/topbar.svg',
-            height: double.infinity,
-            width: double.infinity,
-            fit:BoxFit.cover
-            ),
-                ],
-                 ),
-                 leading:BackButton(
-                  color:AppColors.collGray
-                 ),
-      ),
-      body: Column(
-        children: [
-          Align(
-          child: Text('سامح مول',
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-            color: AppColors.deepBlue,
-          ),),
-          ),
-          Expanded(
-            child:ListView.builder
-           (
-            itemCount: products.length,
-            itemBuilder:(context,index){
-              final product = products[index];
-
-              return Padding(
-                padding:const EdgeInsets.all(10),
-                child: Stack(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: AppColors.deepBlue,
-                        borderRadius: BorderRadius.circular(15)
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-
-                          Container(
-                            width: 80,
-                            height: 80,
-                            decoration: BoxDecoration(
-                              color: AppColors.white,
-                              borderRadius: BorderRadius.circular(15)
-                            ),
-                            child: Image.asset(product.image),
-                          ),
-
-                            Column(
-                            crossAxisAlignment:CrossAxisAlignment.start ,
-                            children: [
-                              Text(product.name,
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: AppColors.collGray
-                              ),
-                               ),
-                               Text(product.price,
-                               style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.collGray
-                               ),)
-
-                            ],
-                          ),
-
-                          CircleAvatar(
-                            backgroundColor: Colors.green,
-                            child: Icon(Icons.add,color:AppColors.white),
-                          ),
-
-                           
-                         
-                         
-                        ],
-                      ),
-                    ),
-
-                   if (product.isSpecial)
-                  Positioned(
-                    top: -8,
-                    left: -8,
-                    child: Transform.rotate(
-                      angle: -0.12,
-                      child: Image.asset("assets/images/offerchart.png",
-                      filterQuality: FilterQuality.high
-                      ,),
-                 
-                ),
-                  ),
-        ]),
-              );
-   } )
-                      ),
-            
-
-
-             ElevatedButton(
-               onPressed: (){
-               Navigator.push(context, MaterialPageRoute(builder: (context)=> Aqrabawi(),
-               ),               
-             );
-             },
-              child:Text("السوق التالي",
-              style: TextStyle(
-                color: AppColors.deepBlue,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                
-              ),
-             )
-           )
-        ],
-      ),
-
-    );
-  }
-}*/

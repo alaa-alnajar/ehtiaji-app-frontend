@@ -2,13 +2,13 @@ class Category {
   final int categoryId;
   final String categoryName;
   final String image;
-  final int mallId;
+  final int mallid;
 
   Category({
     required this.categoryId,
     required this.categoryName,
     required this.image,
-    required this.mallId
+    required this.mallid,
   });
 
   factory Category.fromJson(Map<String, dynamic> json) {
@@ -16,7 +16,7 @@ class Category {
       categoryId: json['category_id'],
       categoryName: json['category_name'] ?? '',
       image: json['image'] ?? '',
-      mallId: json['mall'],
+      mallid: json['mall_id'] ?? '',
 
     );
   }

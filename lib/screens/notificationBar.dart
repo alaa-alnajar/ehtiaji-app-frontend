@@ -16,29 +16,46 @@ List<Offers> offers = [
 
 
   Offers(
+    offerName: "",
     mallName: " العروض بين يديك 24/7  ",
     image:'assets/images/card.png', 
     discountType: "خصومات تصل الى 90%" ,
     discountAmount:"90%",
-
-    ),
+    startDate: " ",
+    endDate: "على كافة فروع سيتي مول" ,
+    isActive: true,
+       ),
   Offers(
+    offerName: "",
     mallName: "سامح مول ",
     image:'assets/images/offers.png' , 
     discountType: "خصم اليوم الوطني 50% ",
     discountAmount: "50%",
+    startDate: " ",
+    endDate: "تاريخ الانتهاء بعد أسبوعين ",
+    isActive: true,
     ),
     Offers(
+      offerName: "",
     mallName: "العقرباوي مول ",
     image:'assets/images/sales.png', 
     discountType: "خصومات الجمعة السوداء ",
     discountAmount:"20%",
+    startDate: " ",
+    endDate: "تاريخ الانتهاء بعد أسبوع ",
+    isActive: true,
+   
     ),
     Offers(
+    offerName: "",
     mallName: "ميكا مول",
     image:'assets/images/blackfriday.png', 
     discountType: "خصم السنة الجديدة ",
     discountAmount:"70%",
+    startDate: " ",
+    endDate: "تاريخ الانتهاء بعد 5 أيام ",
+    isActive: true
+   
     ),
     
 ];
@@ -64,9 +81,9 @@ class _NotificationbarState extends State<Notificationbar> {
             child: Stack(
               children: [
                 Positioned(
-                  top: 28,
-                  right: 10,
-                  bottom: 5,
+                  top: 23,
+                  right: 6,
+                  bottom: 10,
                    child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.asset(
@@ -112,6 +129,16 @@ class _NotificationbarState extends State<Notificationbar> {
                     ),
                   ),
                 ),
+                SizedBox(height: 5)
+                ,Positioned(
+                  bottom: 10,
+                  right:15 ,
+                  child: Text(offer.endDate,
+                  style:TextStyle(
+                    color: AppColors.white,
+                    fontSize: 14,
+                  ) ,)
+                )
 
 
 

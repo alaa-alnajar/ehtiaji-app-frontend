@@ -3,6 +3,7 @@ import 'package:ehtiaji/models/shoppinglistitem.dart';
 
 
 class Cart {
+  static DateTime? lastUpdate;
 
   static List<ShoppingListItem> items = [];
 
@@ -21,9 +22,12 @@ class Cart {
       items.add(
         ShoppingListItem(
          product: product,
-         quantity: 1
+         quantity: 1,
         ),
       );
+         lastUpdate = DateTime.now();
+
+      
     }
   }
 
@@ -42,6 +46,8 @@ class Cart {
       } else {
 
         items.removeAt(index);
+        lastUpdate = DateTime.now();
+
 
       }
     }
